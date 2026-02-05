@@ -2,29 +2,11 @@
 	import { getUserImagesClient, type StoredImage } from '@/protocol/client-reader';
 	import UserGallery from './UserGallery.svelte';
 	import PixelBackground from './PixelBackground.svelte';
-	import en from '@/i18n/en.json';
-	import es from '@/i18n/es.json';
+	import { initLanguage } from '@/lib/stores/language.svelte';
+	import { useTranslations } from '@/i18n/config';
 
-	const translations = { en, es } as const;
-	type Lang = keyof typeof translations;
-
-	// Language detection - runs once on client, defaults to 'en' on SSR
-	const lang: Lang = typeof window !== 'undefined'
-		? (navigator?.language?.split('-')[0] === 'es' ? 'es' : 'en')
-		: 'en';
-
-	function t(key: string): string {
-		const keys = key.split('.');
-		let value: unknown = translations[lang];
-		for (const k of keys) {
-			if (value && typeof value === 'object' && k in value) {
-				value = (value as Record<string, unknown>)[k];
-			} else {
-				return key;
-			}
-		}
-		return typeof value === 'string' ? value : key;
-	}
+	const lang = initLanguage();
+	const t = useTranslations(lang);
 
 	interface Props {
 		username: string;

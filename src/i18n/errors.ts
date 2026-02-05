@@ -1,3 +1,5 @@
+import { getLanguage } from '@/lib/stores/language.svelte';
+
 export type ErrorLang = 'en' | 'es';
 
 const errorMessages = {
@@ -55,7 +57,5 @@ export function getErrorMessage<K extends ErrorKey>(
 }
 
 export function detectErrorLang(): ErrorLang {
-	if (typeof window === 'undefined') return 'en';
-	const browserLang = navigator?.language?.split('-')[0];
-	return browserLang === 'es' ? 'es' : 'en';
+	return getLanguage();
 }

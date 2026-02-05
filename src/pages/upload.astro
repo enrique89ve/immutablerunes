@@ -543,28 +543,11 @@ const t = useTranslations(lang);
     isKeychainAvailable,
     type BroadcastProgress,
   } from "@/lib/broadcast";
-  import en from "@/i18n/en.json";
-  import es from "@/i18n/es.json";
+  import { initLanguage } from "@/lib/stores/language.svelte";
+  import { useTranslations } from "@/i18n/config";
 
-  const translations = { en, es } as const;
-  type Lang = keyof typeof translations;
-
-  // Language detection with fallback
-  const lang: Lang = navigator?.language?.split("-")[0] === "es" ? "es" : "en";
-
-  function t(key: string | undefined): string {
-    if (!key) return '';
-    const keys = key.split(".");
-    let value: unknown = translations[lang];
-    for (const k of keys) {
-      if (value && typeof value === "object" && k in value) {
-        value = (value as Record<string, unknown>)[k];
-      } else {
-        return key;
-      }
-    }
-    return typeof value === "string" ? value : key;
-  }
+  const lang = initLanguage();
+  const t = useTranslations(lang);
 
   // DOM elements
   const authRequired = document.getElementById("auth-required");
