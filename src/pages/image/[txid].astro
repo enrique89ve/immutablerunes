@@ -1,0 +1,30 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/svelte/Header.svelte';
+import ImageViewer from '@/components/svelte/ImageViewer.svelte';
+import { sanitizeTxid } from '@/lib/validation/hive';
+
+const { txid: rawTxid } = Astro.params;
+
+const txid = sanitizeTxid(rawTxid);
+
+if (!txid) {
+	return Astro.redirect('/explore');
+}
+
+// Basic metadata - la imagen se carga del lado del cliente
+const pageTitle = 'Pixel Art | Immutable Runes';
+const pageDescription = 'Pixel art guardado permanentemente en la blockchain de Hive';
+const ogImageUrl = `${Astro.url.origin}/api/og/${txid}`;
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	ogImage={ogImageUrl}
+	ogType="article"
+	twitterCard="summary_large_image"
+>
+	<Header client:load />
+	<ImageViewer txid={txid} client:load />
+</Layout>

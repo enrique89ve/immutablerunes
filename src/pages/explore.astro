@@ -1,0 +1,10 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/svelte/Header.svelte';
+import ExploreLoader from '@/components/svelte/ExploreLoader.svelte';
+---
+
+<Layout title="Explorar | Immutable Runes">
+	<Header client:load />
+	<ExploreLoader client:load />
+</Layout>

@@ -1,0 +1,66 @@
+---
+interface Props {
+	title?: string;
+	description?: string;
+	ogImage?: string;
+	ogType?: string;
+	twitterCard?: 'summary' | 'summary_large_image';
+}
+
+const {
+	title = "Immutable Runes",
+	description = "Almacena y visualiza Pixel Art de forma inmutable en la blockchain de Hive",
+	ogImage,
+	ogType = "website",
+	twitterCard = "summary_large_image"
+} = Astro.props;
+
+const siteUrl = Astro.url.origin;
+const canonicalUrl = Astro.url.href;
+const defaultOgImage = `${siteUrl}/og-default.png`;
+const finalOgImage = ogImage || defaultOgImage;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="color-scheme" content="dark" />
+		<meta name="description" content={description} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content={ogType} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={finalOgImage} />
+		<meta property="og:site_name" content="Immutable Runes" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content={twitterCard} />
+		<meta name="twitter:url" content={canonicalUrl} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={finalOgImage} />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body class="min-h-screen font-sans antialiased">
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	@import "../styles/global.css";
+</style>

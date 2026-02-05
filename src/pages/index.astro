@@ -1,0 +1,339 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/svelte/Header.svelte";
+---
+
+<Layout>
+  <Header client:load />
+
+  <main class="relative min-h-[calc(100vh-4rem)] overflow-hidden">
+    <!-- Background grid pattern -->
+    <div class="grid-pattern absolute inset-0 opacity-30"></div>
+
+    <!-- Noise texture -->
+    <div class="noise absolute inset-0"></div>
+
+    <!-- Hero section -->
+    <section
+      class="relative flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4 py-24"
+    >
+      <!-- Floating accent orb -->
+      <div
+        class="bg-accent absolute top-1/4 left-1/4 h-64 w-64 rounded-full opacity-5 blur-[100px]"
+      >
+      </div>
+      <div
+        class="bg-accent absolute right-1/4 bottom-1/4 h-48 w-48 rounded-full opacity-5 blur-[80px]"
+      >
+      </div>
+
+      <!-- Content -->
+      <div class="relative z-10 max-w-4xl text-center">
+        <!-- Tag -->
+        <div
+          class="animate-fade-in border-border mb-6 inline-flex items-center gap-2 border px-3 py-1"
+        >
+          <span class="bg-accent h-2 w-2 animate-pulse rounded-full"></span>
+          <span
+            class="text-muted-foreground font-mono text-xs tracking-wider uppercase"
+          >
+            Almacenamiento on-chain
+          </span>
+        </div>
+
+        <!-- Headline -->
+        <h1
+          class="animate-slide-up mb-6 font-mono text-4xl font-bold tracking-tight uppercase delay-1 sm:text-5xl md:text-6xl lg:text-7xl"
+        >
+          <span class="block">Tu pixel art,</span>
+          <span class="text-glow text-accent block">onChain</span>
+        </h1>
+
+        <!-- Subheadline -->
+        <p
+          class="animate-slide-up text-muted-foreground mx-auto mb-8 max-w-2xl font-sans text-lg delay-2 sm:text-xl"
+        >
+          Imágenes directamente en la blockchain de Hive.<br />
+          <span class="text-foreground">Sin servidores externos.</span>
+          Almacenadas en base64 on-chain.
+        </p>
+
+        <!-- Trust badges -->
+        <div
+          class="animate-slide-up flex flex-wrap items-center justify-center gap-3 mb-10 delay-2"
+        >
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-subtle border border-text/10 font-mono text-xs">
+            <span class="text-accent">✓</span> Sin CDN
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-subtle border border-text/10 font-mono text-xs">
+            <span class="text-accent">✓</span> Sin IPFS
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-subtle border border-text/10 font-mono text-xs">
+            <span class="text-accent">✓</span> Sin cloud storage
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-subtle border border-text/10 font-mono text-xs">
+            <span class="text-accent">✓</span> 100% on-chain
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-subtle border border-text/10 font-mono text-xs">
+            <span class="text-accent">✓</span> Acceso público
+          </span>
+        </div>
+
+        <!-- CTA buttons -->
+        <div
+          class="animate-slide-up flex flex-col items-center justify-center gap-4 delay-3 sm:flex-row"
+        >
+          <a
+            href="/upload"
+            class="glow-accent group bg-accent relative overflow-hidden px-8 py-4 font-mono text-sm tracking-wider text-white uppercase transition-transform hover:scale-105"
+          >
+            <span class="relative z-10 flex items-center gap-2">
+              <svg
+                class="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              Subir mi imagen
+            </span>
+          </a>
+          <a
+            href="/explore"
+            class="group border-border text-foreground hover:border-foreground border px-8 py-4 font-mono text-sm tracking-wider uppercase transition-all"
+          >
+            <span class="flex items-center gap-2">
+              Ver galería
+              <svg
+                class="h-4 w-4 transition-transform group-hover:translate-x-1"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </span>
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div
+          class="animate-slide-up border-border mt-16 grid grid-cols-3 gap-8 border-t pt-8 delay-4"
+        >
+          <div class="text-center">
+            <p
+              class="text-accent font-mono text-2xl font-bold sm:text-3xl"
+              id="stat-images"
+            >
+              —
+            </p>
+            <p
+              class="text-muted-foreground font-mono text-xs tracking-wider uppercase"
+            >
+              Imágenes
+            </p>
+          </div>
+          <div class="text-center">
+            <p class="font-mono text-2xl font-bold sm:text-3xl">25KB</p>
+            <p
+              class="text-muted-foreground font-mono text-xs tracking-wider uppercase"
+            >
+              Tamaño máx.
+            </p>
+          </div>
+          <div class="text-center">
+            <p class="font-mono text-2xl font-bold sm:text-3xl">∞</p>
+            <p
+              class="text-muted-foreground font-mono text-xs tracking-wider uppercase"
+            >
+              Permanencia
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <svg
+          class="text-muted-foreground h-6 w-6"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Features section -->
+    <section class="border-border relative border-t py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-8 md:grid-cols-3">
+          <!-- Feature 1 -->
+          <div
+            class="group border-border hover:border-accent border p-6 transition-colors"
+          >
+            <div
+              class="border-accent bg-accent/10 mb-4 flex h-12 w-12 items-center justify-center border"
+            >
+              <svg
+                class="text-accent h-6 w-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h3
+              class="mb-2 font-mono text-lg font-semibold tracking-wide uppercase"
+            >
+              Inmutable
+            </h3>
+            <p class="text-muted-foreground font-sans text-sm">
+              Tu arte queda grabado en la blockchain. Nadie puede borrarlo,
+              censurarlo o modificarlo.
+            </p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div
+            class="group border-border hover:border-accent border p-6 transition-colors"
+          >
+            <div
+              class="border-accent bg-accent/10 mb-4 flex h-12 w-12 items-center justify-center border"
+            >
+              <svg
+                class="text-accent h-6 w-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 6v6l4 2"></path>
+              </svg>
+            </div>
+            <h3
+              class="mb-2 font-mono text-lg font-semibold tracking-wide uppercase"
+            >
+              Sin costo
+            </h3>
+            <p class="text-muted-foreground font-sans text-sm">
+              Solo necesitas una cuenta de Hive con Resource Credits. Sin
+              tarifas de transacción.
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div
+            class="group border-border hover:border-accent border p-6 transition-colors"
+          >
+            <div
+              class="border-accent bg-accent/10 mb-4 flex h-12 w-12 items-center justify-center border"
+            >
+              <svg
+                class="text-accent h-6 w-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                <path d="M3 9h18M9 21V9"></path>
+              </svg>
+            </div>
+            <h3
+              class="mb-2 font-mono text-lg font-semibold tracking-wide uppercase"
+            >
+              Optimizado
+            </h3>
+            <p class="text-muted-foreground font-sans text-sm">
+              Compresión inteligente diseñada para pixel art. Máxima calidad en
+              el menor espacio.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="border-border relative border-t py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2
+          class="mb-12 text-center font-mono text-2xl font-bold tracking-wider uppercase sm:text-3xl"
+        >
+          Cómo funciona
+        </h2>
+
+        <div class="grid gap-8 md:grid-cols-4">
+          {
+            [
+              {
+                step: "01",
+                title: "Sube tu imagen",
+                desc: "PNG, JPEG o WebP",
+              },
+              {
+                step: "02",
+                title: "Conversión",
+                desc: "Se convierte automáticamente a base64",
+              },
+              {
+                step: "03",
+                title: "Firma y guarda",
+                desc: "Se almacena directamente en Hive",
+              },
+              {
+                step: "04",
+                title: "Para siempre",
+                desc: "Pública y accesible por cualquier persona",
+              },
+            ].map((item) => (
+              <div class="relative text-center">
+                <div class="text-accent/20 mb-4 font-mono text-5xl font-bold">
+                  {item.step}
+                </div>
+                <h3 class="mb-2 font-mono text-lg font-semibold uppercase">
+                  {item.title}
+                </h3>
+                <p class="text-muted-foreground font-sans text-sm">
+                  {item.desc}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Public notice -->
+        <p class="mt-12 text-center font-mono text-xs text-muted-foreground">
+          <span class="text-accent">Importante:</span> Todas las imágenes son públicas y visibles para cualquier persona.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-border border-t py-8">
+    <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+      <p class="text-muted-foreground font-mono text-xs">
+        Desarrollado sobre <a
+          href="https://hive.io"
+          target="_blank"
+          rel="noopener"
+          class="text-accent hover:underline">Hive Blockchain</a
+        >
+        <span class="mx-2">·</span>
+        <span class="animate-blink">█</span>
+      </p>
+    </div>
+  </footer>
+</Layout>

@@ -1,0 +1,152 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/svelte/Header.svelte';
+---
+
+<Layout title="404 - Página no encontrada | Immutable Runes">
+	<Header client:load />
+
+	<main class="relative min-h-[calc(100vh-4rem)] bg-bg flex items-center justify-center">
+		<!-- Scanline background -->
+		<div class="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(255,255,255,0.01)_2px,rgba(255,255,255,0.01)_4px)] pointer-events-none"></div>
+
+		<!-- Floating pixels decoration -->
+		<div class="absolute inset-0 overflow-hidden pointer-events-none">
+			<div class="pixel-float" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+			<div class="pixel-float" style="left: 85%; top: 15%; animation-delay: 0.5s;"></div>
+			<div class="pixel-float" style="left: 20%; top: 70%; animation-delay: 1s;"></div>
+			<div class="pixel-float" style="left: 75%; top: 80%; animation-delay: 1.5s;"></div>
+			<div class="pixel-float" style="left: 50%; top: 10%; animation-delay: 2s;"></div>
+			<div class="pixel-float" style="left: 30%; top: 85%; animation-delay: 0.3s;"></div>
+		</div>
+
+		<div class="relative text-center px-4 py-16">
+			<!-- Glitchy 404 number -->
+			<div class="relative mb-8">
+				<h1 class="font-mono text-[120px] sm:text-[180px] md:text-[220px] font-bold text-text/5 leading-none select-none">
+					404
+				</h1>
+				<div class="absolute inset-0 flex items-center justify-center">
+					<span class="glitch-text font-mono text-6xl sm:text-8xl md:text-9xl font-bold text-accent" data-text="404">
+						404
+					</span>
+				</div>
+			</div>
+
+			<!-- Icon -->
+			<div class="w-20 h-20 mx-auto mb-6 rounded-lg bg-accent/10 border border-accent/30 flex items-center justify-center">
+				<svg class="w-10 h-10 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+					<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+					<circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"></circle>
+					<path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round"></path>
+					<line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="2" opacity="0.5"></line>
+				</svg>
+			</div>
+
+			<!-- Message -->
+			<h2 class="font-mono text-xl sm:text-2xl text-text mb-3 uppercase tracking-wider">
+				Imagen no encontrada
+			</h2>
+			<p class="font-mono text-sm text-text/50 mb-8 max-w-md mx-auto">
+				Este pixel parece haberse perdido en la blockchain...
+			</p>
+
+			<!-- Actions -->
+			<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+				<a
+					href="/"
+					class="group flex items-center gap-2 px-6 py-3 bg-accent text-white font-mono text-xs uppercase tracking-wider rounded hover:bg-accent/90 transition-all hover:scale-105 shadow-[0_0_20px_rgba(238,52,74,0.3)]"
+				>
+					<svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M19 12H5M12 19l-7-7 7-7"></path>
+					</svg>
+					Volver al inicio
+				</a>
+				<a
+					href="/explore"
+					class="flex items-center gap-2 px-6 py-3 border border-text/20 text-text/70 font-mono text-xs uppercase tracking-wider rounded hover:border-accent hover:text-accent transition-colors"
+				>
+					<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+						<circle cx="8.5" cy="8.5" r="1.5"></circle>
+						<polyline points="21 15 16 10 5 21"></polyline>
+					</svg>
+					Explorar galería
+				</a>
+			</div>
+
+			<!-- Transaction hint -->
+			<p class="mt-12 font-mono text-[10px] text-text/30 uppercase tracking-widest">
+				¿Buscas una transacción específica? Verifica el ID
+			</p>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	/* Floating pixel decoration */
+	.pixel-float {
+		position: absolute;
+		width: 8px;
+		height: 8px;
+		background: var(--color-accent);
+		opacity: 0.15;
+		animation: pixel-drift 8s ease-in-out infinite;
+	}
+
+	@keyframes pixel-drift {
+		0%, 100% {
+			transform: translateY(0) rotate(0deg);
+			opacity: 0.15;
+		}
+		50% {
+			transform: translateY(-30px) rotate(180deg);
+			opacity: 0.3;
+		}
+	}
+
+	/* Glitch effect for 404 */
+	.glitch-text {
+		position: relative;
+	}
+
+	.glitch-text::before,
+	.glitch-text::after {
+		content: attr(data-text);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.glitch-text::before {
+		animation: glitch-1 2s infinite linear alternate-reverse;
+		clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+		color: rgba(238, 52, 74, 0.8);
+	}
+
+	.glitch-text::after {
+		animation: glitch-2 3s infinite linear alternate-reverse;
+		clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+		color: rgba(238, 52, 74, 0.6);
+	}
+
+	@keyframes glitch-1 {
+		0% { transform: translate(0); }
+		20% { transform: translate(-2px, 2px); }
+		40% { transform: translate(-2px, -2px); }
+		60% { transform: translate(2px, 2px); }
+		80% { transform: translate(2px, -2px); }
+		100% { transform: translate(0); }
+	}
+
+	@keyframes glitch-2 {
+		0% { transform: translate(0); }
+		20% { transform: translate(2px, -2px); }
+		40% { transform: translate(2px, 2px); }
+		60% { transform: translate(-2px, -2px); }
+		80% { transform: translate(-2px, 2px); }
+		100% { transform: translate(0); }
+	}
+</style>
