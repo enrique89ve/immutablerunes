@@ -3,13 +3,38 @@
 	import ImageModal from './ImageModal.svelte';
 	import ImageCard from './ImageCard.svelte';
 	import type { ExploreImage } from '@/protocol';
+	import en from '@/i18n/en.json';
+	import es from '@/i18n/es.json';
+
+	const translations = { en, es } as const;
+	type Lang = keyof typeof translations;
+
+	// Language detection - runs once on client, defaults to 'en' on SSR
+	const lang: Lang = typeof window !== 'undefined'
+		? (navigator?.language?.split('-')[0] === 'es' ? 'es' : 'en')
+		: 'en';
+	const locale = lang === 'es' ? 'es-ES' : 'en-US';
+
+	function t(key: string): string {
+		const keys = key.split('.');
+		let value: unknown = translations[lang];
+		for (const k of keys) {
+			if (value && typeof value === 'object' && k in value) {
+				value = (value as Record<string, unknown>)[k];
+			} else {
+				return key;
+			}
+		}
+		return typeof value === 'string' ? value : key;
+	}
 
 	interface Props {
 		images: StoredImage[];
 		emptyMessage?: string;
 	}
 
-	let { images, emptyMessage = 'No hay imágenes aún' }: Props = $props();
+	let { images, emptyMessage }: Props = $props();
+	const defaultEmptyMessage = $derived(emptyMessage ?? t('profile.empty'));
 
 	let selectedImage: ExploreImage | null = $state(null);
 	let viewMode: 'grid' | 'large' = $state('large');
@@ -34,11 +59,11 @@
 		const hours = Math.floor(diff / 3600000);
 		const days = Math.floor(diff / 86400000);
 
-		if (minutes < 1) return 'ahora';
+		if (minutes < 1) return lang === 'es' ? 'ahora' : 'now';
 		if (minutes < 60) return `${minutes}m`;
 		if (hours < 24) return `${hours}h`;
 		if (days < 30) return `${days}d`;
-		return new Date(createdAt).toLocaleDateString('es-ES', { month: 'short', day: 'numeric' });
+		return new Date(createdAt).toLocaleDateString(locale, { month: 'short', day: 'numeric' });
 	}
 </script>
 
@@ -54,7 +79,7 @@
 				<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 					<rect x="3" y="3" width="18" height="18" rx="2"/>
 				</svg>
-				Grande
+				{t('gallery.large')}
 			</button>
 			<button
 				type="button"
@@ -141,7 +166,7 @@
 			</div>
 		</div>
 
-		<p class="font-mono text-sm text-text/60 mb-6 text-center max-w-xs">{emptyMessage}</p>
+		<p class="font-mono text-sm text-text/60 mb-6 text-center max-w-xs">{defaultEmptyMessage}</p>
 
 		<!-- CTA Button styled like Hero -->
 		<a
@@ -153,7 +178,7 @@
 				<polyline points="17 8 12 3 7 8"/>
 				<line x1="12" y1="3" x2="12" y2="15"/>
 			</svg>
-			Subir mi primera imagen
+			{t('profile.uploadFirst')}
 		</a>
 	</div>
 {/if}

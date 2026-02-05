@@ -2,6 +2,29 @@
 	import { KeychainSDK, KeychainKeyTypes } from 'keychain-sdk';
 	import type { SignBuffer } from 'keychain-sdk';
 	import { AUTH_STORAGE_KEY } from '@/lib/constants';
+	import en from '@/i18n/en.json';
+	import es from '@/i18n/es.json';
+
+	const translations = { en, es } as const;
+	type Lang = keyof typeof translations;
+
+	// Language detection - runs once on client, defaults to 'en' on SSR
+	const lang: Lang = typeof window !== 'undefined'
+		? (navigator?.language?.split('-')[0] === 'es' ? 'es' : 'en')
+		: 'en';
+
+	function t(key: string): string {
+		const keys = key.split('.');
+		let value: unknown = translations[lang];
+		for (const k of keys) {
+			if (value && typeof value === 'object' && k in value) {
+				value = (value as Record<string, unknown>)[k];
+			} else {
+				return key;
+			}
+		}
+		return typeof value === 'string' ? value : key;
+	}
 
 	let { isOpen = $bindable(false), onSuccess }: { isOpen: boolean; onSuccess?: (username: string) => void } = $props();
 
@@ -44,7 +67,7 @@
 
 	async function handleLogin() {
 		if (!username.trim()) {
-			error = 'Ingresa tu nombre de usuario';
+			error = t('login.errors.loginFailed');
 			return;
 		}
 
@@ -55,14 +78,14 @@
 			const keychain = new KeychainSDK(window);
 
 			if (!(await keychain.isKeychainInstalled())) {
-				throw new Error('Hive Keychain no está instalado');
+				throw new Error(t('login.errors.keychainNotFound'));
 			}
 
 			const signBufferData: SignBuffer = {
 				username: username.trim().toLowerCase(),
 				message: 'Login to Immutable Runes',
 				method: KeychainKeyTypes.posting,
-				title: 'Iniciar sesión'
+				title: t('login.title')
 			};
 
 			const response = await keychain.signBuffer(signBufferData);
@@ -73,10 +96,10 @@
 				isOpen = false;
 				onSuccess?.(loggedUsername);
 			} else {
-				throw new Error(response.message || 'Inicio de sesión cancelado');
+				throw new Error(response.message || t('login.errors.userCancelled'));
 			}
 		} catch (err) {
-			error = err instanceof Error ? err.message : 'Error al conectar';
+			error = err instanceof Error ? err.message : t('login.errors.loginFailed');
 		} finally {
 			isLoading = false;
 		}
@@ -120,7 +143,7 @@
 			<button
 				onclick={() => isOpen = false}
 				class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-white/50 transition-colors hover:text-white hover:bg-white/10 rounded"
-				aria-label="Cerrar"
+				aria-label={t('common.close')}
 			>
 				<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 					<path d="M18 6L6 18M6 6l12 12" />
@@ -138,10 +161,10 @@
 					</div>
 				</div>
 				<h2 id="login-title" class="font-mono text-xl font-bold uppercase tracking-wider text-white">
-					Conectar cuenta
+					{t('login.title')}
 				</h2>
 				<p class="mt-2 text-sm text-white/60">
-					Ingresa tu usuario de Hive para continuar
+					{t('login.subtitle')}
 				</p>
 			</div>
 
@@ -166,7 +189,7 @@
 			<!-- Username input -->
 			<div class="mb-4">
 				<label for="username" class="mb-2 block font-mono text-xs uppercase tracking-wider text-white/60">
-					Usuario
+					{t('login.usernamePlaceholder')}
 				</label>
 				<div class="flex items-center border-2 border-white/20 bg-white/5 rounded focus-within:border-accent/50 transition-colors">
 					<span class="px-3 font-mono text-white/40">@</span>
@@ -174,7 +197,7 @@
 						id="username"
 						type="text"
 						bind:value={username}
-						placeholder="tunombre"
+						placeholder={t('login.usernamePlaceholder')}
 						disabled={isLoading}
 						class="w-full bg-transparent px-3 py-3 font-mono text-sm text-white placeholder:text-white/30 focus:outline-none disabled:opacity-50"
 					/>
@@ -200,16 +223,16 @@
 							<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
 							<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
 						</svg>
-						Conectando...
+						{t('login.connecting')}
 					</span>
 				{:else}
-					Conectar con Keychain
+					{t('login.connectButton')}
 				{/if}
 			</button>
 
 			<!-- Help text -->
 			<p class="mt-4 text-center font-mono text-xs text-white/40">
-				Necesitas <a href="https://hive-keychain.com" target="_blank" rel="noopener" class="text-accent hover:underline">Hive Keychain</a> instalado
+				{t('login.keychainRequired')} <a href="https://hive-keychain.com" target="_blank" rel="noopener" class="text-accent hover:underline">{t('login.installKeychain')}</a>
 			</p>
 		</div>
 	</div>

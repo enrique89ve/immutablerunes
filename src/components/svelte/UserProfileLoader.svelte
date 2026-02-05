@@ -2,6 +2,29 @@
 	import { getUserImagesClient, type StoredImage } from '@/protocol/client-reader';
 	import UserGallery from './UserGallery.svelte';
 	import PixelBackground from './PixelBackground.svelte';
+	import en from '@/i18n/en.json';
+	import es from '@/i18n/es.json';
+
+	const translations = { en, es } as const;
+	type Lang = keyof typeof translations;
+
+	// Language detection - runs once on client, defaults to 'en' on SSR
+	const lang: Lang = typeof window !== 'undefined'
+		? (navigator?.language?.split('-')[0] === 'es' ? 'es' : 'en')
+		: 'en';
+
+	function t(key: string): string {
+		const keys = key.split('.');
+		let value: unknown = translations[lang];
+		for (const k of keys) {
+			if (value && typeof value === 'object' && k in value) {
+				value = (value as Record<string, unknown>)[k];
+			} else {
+				return key;
+			}
+		}
+		return typeof value === 'string' ? value : key;
+	}
 
 	interface Props {
 		username: string;
@@ -25,7 +48,7 @@
 		} catch (error) {
 			state = {
 				status: 'error',
-				message: error instanceof Error ? error.message : 'Error al cargar las imágenes'
+				message: error instanceof Error ? error.message : t('common.error')
 			};
 		}
 	}
@@ -34,9 +57,12 @@
 		loadImages();
 	});
 
-	const imageCount = $derived(
-		state.status === 'success' ? state.images.length : 0
-	);
+	const imageCount = $derived.by(() => {
+		if (state.status === 'success') {
+			return state.images.length;
+		}
+		return 0;
+	});
 </script>
 
 <main class="relative min-h-screen bg-bg text-text overflow-hidden">
@@ -84,7 +110,7 @@
 							<span class="font-mono text-sm text-text/50">...</span>
 						{:else}
 							<span class="font-mono text-sm text-text">
-								{imageCount} {imageCount === 1 ? 'imagen' : 'imagenes'}
+								{imageCount} {t('profile.images')}
 							</span>
 						{/if}
 					</div>
@@ -117,7 +143,7 @@
 						</svg>
 					</div>
 				</div>
-				<p class="mt-4 font-mono text-sm text-text/50">Cargando imagenes...</p>
+				<p class="mt-4 font-mono text-sm text-text/50">{t('common.loading')}</p>
 			</div>
 		{:else if state.status === 'error'}
 			<div class="bg-accent/10 border border-accent/30 rounded-lg p-4 text-center">
@@ -126,7 +152,7 @@
 		{:else}
 			<UserGallery
 				images={state.images}
-				emptyMessage="@{username} aun no tiene imagenes guardadas"
+				emptyMessage={t('profile.emptyOwn')}
 			/>
 		{/if}
 	</div>

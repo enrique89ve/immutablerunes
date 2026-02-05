@@ -3,6 +3,10 @@ import Layout from '@/layouts/Layout.astro';
 import Header from '@/components/svelte/Header.svelte';
 import UserProfileLoader from '@/components/svelte/UserProfileLoader.svelte';
 import { sanitizeUsername } from '@/lib/validation/hive';
+import { getLangFromUrl, useTranslations } from '@/i18n/config';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const { username: rawUsername } = Astro.params;
 
@@ -11,9 +15,11 @@ const username = sanitizeUsername(rawUsername);
 if (!username) {
 	return Astro.redirect('/');
 }
+
+const pageTitle = t('profile.title').replace('{username}', username);
 ---
 
-<Layout title={`@${username} | Immutable Runes`}>
+<Layout title={`${pageTitle} | ${t('header.brandName')}`}>
 	<Header client:load />
 	<UserProfileLoader username={username} client:load />
 </Layout>

@@ -1,5 +1,29 @@
 <script lang="ts">
 	import type { ExploreImage } from '@/protocol';
+	import en from '@/i18n/en.json';
+	import es from '@/i18n/es.json';
+
+	const translations = { en, es } as const;
+	type Lang = keyof typeof translations;
+
+	// Language detection - runs once on client, defaults to 'en' on SSR
+	const lang: Lang = typeof window !== 'undefined'
+		? (navigator?.language?.split('-')[0] === 'es' ? 'es' : 'en')
+		: 'en';
+	const locale = lang === 'es' ? 'es-ES' : 'en-US';
+
+	function t(key: string): string {
+		const keys = key.split('.');
+		let value: unknown = translations[lang];
+		for (const k of keys) {
+			if (value && typeof value === 'object' && k in value) {
+				value = (value as Record<string, unknown>)[k];
+			} else {
+				return key;
+			}
+		}
+		return typeof value === 'string' ? value : key;
+	}
 
 	interface Props {
 		image: ExploreImage | null;
@@ -8,7 +32,6 @@
 
 	let { image, onclose }: Props = $props();
 
-	// Calcular dimensiones escaladas manteniendo aspect ratio
 	const scaledDimensions = $derived(() => {
 		if (!image) return { width: 0, height: 0, scale: 1 };
 
@@ -17,7 +40,7 @@
 
 		const scaleX = maxWidth / image.width;
 		const scaleY = maxHeight / image.height;
-		const scale = Math.min(scaleX, scaleY, 6); // Máximo 6x
+		const scale = Math.min(scaleX, scaleY, 6);
 
 		return {
 			width: Math.round(image.width * scale),
@@ -27,7 +50,7 @@
 	});
 
 	function formatDate(timestamp: string): string {
-		return new Date(timestamp).toLocaleDateString('es-ES', {
+		return new Date(timestamp).toLocaleDateString(locale, {
 			year: 'numeric',
 			month: 'short',
 			day: 'numeric',
@@ -63,7 +86,7 @@
 			<button
 				onclick={onclose}
 				class="absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-bg/80 text-text/70 hover:text-text hover:bg-bg transition-colors font-mono"
-				aria-label="Cerrar"
+				aria-label={t('common.close')}
 			>
 				×
 			</button>
@@ -105,12 +128,12 @@
 				<!-- Metadata grid -->
 				<div class="grid grid-cols-2 gap-3 text-center">
 					<div class="bg-subtle rounded p-2">
-						<div class="font-mono text-[10px] uppercase tracking-wide text-text/50 mb-1">Fecha</div>
+						<div class="font-mono text-[10px] uppercase tracking-wide text-text/50 mb-1">{t('imageViewer.uploadedOn')}</div>
 						<div class="font-mono text-xs text-text/80">{formatDate(image.timestamp)}</div>
 					</div>
 					<div class="bg-subtle rounded p-2">
-						<div class="font-mono text-[10px] uppercase tracking-wide text-text/50 mb-1">Bloque</div>
-						<div class="font-mono text-xs text-text/80">{image.blockNumber.toLocaleString()}</div>
+						<div class="font-mono text-[10px] uppercase tracking-wide text-text/50 mb-1">{t('imageViewer.block')}</div>
+						<div class="font-mono text-xs text-text/80">{image.blockNumber.toLocaleString(locale)}</div>
 					</div>
 				</div>
 
@@ -120,7 +143,7 @@
 					download={`${image.imageId}.webp`}
 					class="block w-full px-3 py-2 bg-accent text-white font-mono text-xs text-center uppercase tracking-wider rounded hover:bg-accent/90 transition-colors"
 				>
-					Descargar
+					{t('imageViewer.download')}
 				</a>
 			</div>
 		</div>

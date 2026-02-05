@@ -26,7 +26,7 @@ export {
 	getImageByTxid,
 	type TransactionImage as ServerTransactionImage,
 	type GetImageByTxidResult as ServerGetImageByTxidResult
-} from './payload-reader';
+} from './hafsql-reader';
 
 export {
 	getUserImagesClient,

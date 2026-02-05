@@ -40,7 +40,7 @@ export interface BroadcastProgress {
 	current: number;
 	total: number;
 	status: 'pending' | 'broadcasting' | 'confirmed' | 'failed';
-	message: string;
+	messageKey: string;
 	imageId?: string;
 }
 
@@ -148,7 +148,7 @@ export async function uploadImage(
 		current: 0,
 		total: totalBatches,
 		status: 'pending',
-		message: `Preparando ${totalOperations} operaciones en ${totalBatches} transacción(es)...`,
+		messageKey: 'upload.progress.preparing',
 		imageId: imageBatch.imageId
 	});
 
@@ -160,9 +160,7 @@ export async function uploadImage(
 			current: batchIndex + 1,
 			total: totalBatches,
 			status: 'broadcasting',
-			message: totalBatches === 1
-				? `Firmando ${operationsInBatch} operación(es)...`
-				: `Firmando transacción ${batchIndex + 1} de ${totalBatches} (${operationsInBatch} ops)...`,
+			messageKey: 'upload.progress.signing',
 			imageId: imageBatch.imageId
 		});
 
@@ -180,9 +178,7 @@ export async function uploadImage(
 				current: batchIndex + 1,
 				total: totalBatches,
 				status: 'confirmed',
-				message: totalBatches === 1
-					? 'Transacción confirmada'
-					: `Transacción ${batchIndex + 1} de ${totalBatches} confirmada`,
+				messageKey: 'upload.progress.confirming',
 				imageId: imageBatch.imageId
 			});
 		} else {
@@ -197,7 +193,7 @@ export async function uploadImage(
 				current: batchIndex + 1,
 				total: totalBatches,
 				status: 'failed',
-				message: `Error: ${response.error}`,
+				messageKey: 'upload.errors.uploadFailed',
 				imageId: imageBatch.imageId
 			});
 
@@ -219,7 +215,7 @@ export async function uploadImage(
 		current: totalBatches,
 		total: totalBatches,
 		status: 'confirmed',
-		message: '¡Imagen subida exitosamente!',
+		messageKey: 'upload.progress.complete',
 		imageId: imageBatch.imageId
 	});
 

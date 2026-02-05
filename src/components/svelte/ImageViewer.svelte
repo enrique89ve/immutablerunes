@@ -1,5 +1,28 @@
 <script lang="ts">
 	import { getImageByTxidClient, type TransactionImage } from '@/protocol/client-reader';
+	import en from '@/i18n/en.json';
+	import es from '@/i18n/es.json';
+
+	const translations = { en, es } as const;
+	type Lang = keyof typeof translations;
+
+	// Language detection - runs once on client, defaults to 'en' on SSR
+	const lang: Lang = typeof window !== 'undefined'
+		? (navigator?.language?.split('-')[0] === 'es' ? 'es' : 'en')
+		: 'en';
+
+	function t(key: string): string {
+		const keys = key.split('.');
+		let value: unknown = translations[lang];
+		for (const k of keys) {
+			if (value && typeof value === 'object' && k in value) {
+				value = (value as Record<string, unknown>)[k];
+			} else {
+				return key;
+			}
+		}
+		return typeof value === 'string' ? value : key;
+	}
 
 	interface Props {
 		txid: string;
@@ -63,7 +86,7 @@
 						</svg>
 					</div>
 				</div>
-				<p class="mt-4 font-mono text-sm text-text/50">Cargando imagen...</p>
+				<p class="mt-4 font-mono text-sm text-text/50">{t('common.loading')}</p>
 				<p class="mt-2 font-mono text-[10px] text-text/30 break-all max-w-xs text-center">{txid}</p>
 			</div>
 		{:else if state.status === 'success'}
@@ -118,16 +141,16 @@
 					<!-- Details Grid -->
 					<div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-center">
 						<div class="bg-subtle/50 rounded-lg p-3 border border-text/5">
-							<div class="text-text/40 font-mono text-[10px] uppercase tracking-wider mb-1">Dimensiones</div>
+							<div class="text-text/40 font-mono text-[10px] uppercase tracking-wider mb-1">{t('imageViewer.dimensions')}</div>
 							<div class="font-mono text-sm text-text">{image.width}x{image.height}</div>
 						</div>
 						<div class="bg-subtle/50 rounded-lg p-3 border border-text/5">
-							<div class="text-text/40 font-mono text-[10px] uppercase tracking-wider mb-1">Bloque</div>
+							<div class="text-text/40 font-mono text-[10px] uppercase tracking-wider mb-1">{t('imageViewer.block')}</div>
 							<div class="font-mono text-sm text-text">{image.blockNumber?.toLocaleString() ?? '-'}</div>
 						</div>
 						<div class="bg-subtle/50 rounded-lg p-3 border border-text/5 col-span-2 sm:col-span-1">
-							<div class="text-text/40 font-mono text-[10px] uppercase tracking-wider mb-1">Transparencia</div>
-							<div class="font-mono text-sm text-text">{image.hasTransparency ? 'Si' : 'No'}</div>
+							<div class="text-text/40 font-mono text-[10px] uppercase tracking-wider mb-1">{t('upload.preview.transparency')}</div>
+							<div class="font-mono text-sm text-text">{image.hasTransparency ? t('upload.preview.yes') : t('upload.preview.no')}</div>
 						</div>
 					</div>
 
@@ -149,7 +172,7 @@
 								<polyline points="7 10 12 15 17 10"></polyline>
 								<line x1="12" y1="15" x2="12" y2="3"></line>
 							</svg>
-							Descargar
+							{t('imageViewer.download')}
 						</a>
 						<a
 							href="https://hivehub.dev/tx/{txid}"

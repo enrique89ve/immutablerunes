@@ -1,9 +1,13 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Header from '@/components/svelte/Header.svelte';
+import { getLangFromUrl, useTranslations } from '@/i18n/config';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<Layout title="404 - Página no encontrada | Immutable Runes">
+<Layout title={`${t('errors.notFound.title')} - ${t('errors.notFound.subtitle')} | Immutable Runes`}>
 	<Header client:load />
 
 	<main class="relative min-h-[calc(100vh-4rem)] bg-bg flex items-center justify-center">
@@ -45,10 +49,10 @@ import Header from '@/components/svelte/Header.svelte';
 
 			<!-- Message -->
 			<h2 class="font-mono text-xl sm:text-2xl text-text mb-3 uppercase tracking-wider">
-				Imagen no encontrada
+				{t('errors.notFound.subtitle')}
 			</h2>
 			<p class="font-mono text-sm text-text/50 mb-8 max-w-md mx-auto">
-				Este pixel parece haberse perdido en la blockchain...
+				{t('errors.notFound.description')}
 			</p>
 
 			<!-- Actions -->
@@ -60,7 +64,7 @@ import Header from '@/components/svelte/Header.svelte';
 					<svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 						<path d="M19 12H5M12 19l-7-7 7-7"></path>
 					</svg>
-					Volver al inicio
+					{t('errors.notFound.backHome')}
 				</a>
 				<a
 					href="/explore"
@@ -71,13 +75,13 @@ import Header from '@/components/svelte/Header.svelte';
 						<circle cx="8.5" cy="8.5" r="1.5"></circle>
 						<polyline points="21 15 16 10 5 21"></polyline>
 					</svg>
-					Explorar galería
+					{t('nav.explore')}
 				</a>
 			</div>
 
 			<!-- Transaction hint -->
 			<p class="mt-12 font-mono text-[10px] text-text/30 uppercase tracking-widest">
-				¿Buscas una transacción específica? Verifica el ID
+				{t('errors.notFound.transactionHint')}
 			</p>
 		</div>
 	</main>

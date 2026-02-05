@@ -1,0 +1,210 @@
+{
+	"common": {
+		"loading": "Loading...",
+		"error": "Error",
+		"cancel": "Cancel",
+		"confirm": "Confirm",
+		"close": "Close",
+		"save": "Save",
+		"delete": "Delete",
+		"back": "Back",
+		"next": "Next",
+		"connected": "Connected",
+		"connect": "Connect",
+		"logout": "Logout",
+		"important": "Important:"
+	},
+	"nav": {
+		"explore": "Explore",
+		"upload": "Upload",
+		"myGallery": "My gallery",
+		"uploadImage": "Upload image",
+		"viewOnHive": "View on Hive"
+	},
+	"header": {
+		"brandName": "ImmutableRunes"
+	},
+	"home": {
+		"hero": {
+			"tag": "On-chain storage",
+			"title": "Your pixel art,",
+			"titleHighlight": "onChain",
+			"subtitle": "Images directly on the Hive blockchain.",
+			"subtitleHighlight": "No external servers.",
+			"subtitleEnd": "Stored in base64 on-chain.",
+			"cta": "Upload my image",
+			"exploreLink": "View gallery"
+		},
+		"badges": {
+			"noCdn": "No CDN",
+			"noIpfs": "No IPFS",
+			"noCloud": "No cloud storage",
+			"onChain": "100% on-chain",
+			"publicAccess": "Public access"
+		},
+		"stats": {
+			"images": "Images",
+			"maxSize": "Max size",
+			"permanence": "Permanence"
+		},
+		"features": {
+			"title": "Why Immutable Runes?",
+			"immutable": {
+				"title": "Immutable",
+				"description": "Your art is recorded on the blockchain. No one can delete it, censor it or modify it."
+			},
+			"free": {
+				"title": "Zero Cost",
+				"description": "You only need a Hive account with Resource Credits. No transaction fees."
+			},
+			"optimized": {
+				"title": "Optimized",
+				"description": "Smart compression designed for pixel art. Maximum quality in minimum space."
+			}
+		},
+		"howItWorks": {
+			"title": "How It Works",
+			"step1": {
+				"number": "01",
+				"title": "Upload your image",
+				"description": "PNG, JPEG or WebP"
+			},
+			"step2": {
+				"number": "02",
+				"title": "Conversion",
+				"description": "Automatically converted to base64"
+			},
+			"step3": {
+				"number": "03",
+				"title": "Sign and save",
+				"description": "Stored directly on Hive"
+			},
+			"step4": {
+				"number": "04",
+				"title": "Forever",
+				"description": "Public and accessible by anyone"
+			},
+			"notice": "All images are public and visible to anyone."
+		},
+		"cta": {
+			"title": "Ready to make history?",
+			"subtitle": "Your pixel art deserves to live forever.",
+			"button": "Start Creating"
+		}
+	},
+	"explore": {
+		"title": "Explore",
+		"subtitle": "Discover the latest pixel art stored on the blockchain",
+		"empty": "No images found yet",
+		"emptySubtitle": "Be the first to upload pixel art to the blockchain",
+		"uploadCta": "Upload the first image"
+	},
+	"gallery": {
+		"large": "Large",
+		"grid": "Grid"
+	},
+	"upload": {
+		"title": "Upload",
+		"subtitle": "Store your pixel art permanently on the blockchain",
+		"loginRequired": "Connect your Hive account to upload images",
+		"loginButton": "Connect with Keychain",
+		"dropzone": {
+			"title": "Drop your image here",
+			"subtitle": "or click to select",
+			"formats": "PNG, JPEG, WebP • Max 200×200px",
+			"sizeLimit": "Will be optimized to ~18KB"
+		},
+		"preview": {
+			"title": "Preview",
+			"filename": "Filename",
+			"dimensions": "Dimensions",
+			"size": "Size",
+			"fragments": "Fragments",
+			"aspectRatio": "Aspect Ratio",
+			"transparency": "Transparency",
+			"yes": "Yes",
+			"no": "No",
+			"viewFullSize": "Zoom",
+			"imagePreview": "Image preview",
+			"cancelButton": "Cancel",
+			"uploadButton": "Upload to Blockchain",
+			"processing": "Processing..."
+		},
+		"success": {
+			"title": "Image saved!",
+			"subtitle": "Your pixel art is now on the Hive blockchain",
+			"transactionId": "Transaction ID"
+		},
+		"progress": {
+			"title": "Uploading",
+			"preparing": "Preparing transaction...",
+			"signing": "Signing with Keychain...",
+			"broadcasting": "Broadcasting to blockchain...",
+			"confirming": "Confirming...",
+			"complete": "Complete!",
+			"fragmentProgress": "Fragment {current} of {total}",
+			"viewImage": "View Image",
+			"uploadAnother": "Upload Another"
+		},
+		"errors": {
+			"invalidFormat": "Invalid format. Use PNG, JPEG or WebP",
+			"tooLarge": "Image too large. Maximum 200×200 pixels",
+			"processingFailed": "Failed to process image",
+			"uploadFailed": "Failed to upload image",
+			"keychainRequired": "Hive Keychain is required",
+			"notLoggedIn": "Please login first"
+		}
+	},
+	"profile": {
+		"title": "{username}'s Gallery",
+		"images": "Images",
+		"empty": "No images yet",
+		"emptyOwn": "You haven't uploaded any images yet",
+		"uploadFirst": "Upload your first image",
+		"viewOnHive": "View profile on Hive"
+	},
+	"imageViewer": {
+		"by": "by",
+		"uploadedOn": "Uploaded on",
+		"block": "Block",
+		"transaction": "Transaction",
+		"dimensions": "Dimensions",
+		"aspectRatio": "Aspect Ratio",
+		"viewOnExplorer": "View on Explorer",
+		"copyTxid": "Copy TXID",
+		"copied": "Copied!",
+		"share": "Share",
+		"download": "Download"
+	},
+	"login": {
+		"title": "Connect Wallet",
+		"subtitle": "Enter your Hive username to continue",
+		"usernamePlaceholder": "username",
+		"connectButton": "Connect",
+		"connecting": "Connecting...",
+		"installKeychain": "Install Hive Keychain",
+		"keychainRequired": "Hive Keychain browser extension is required",
+		"errors": {
+			"keychainNotFound": "Hive Keychain not found",
+			"loginFailed": "Login failed",
+			"userCancelled": "User cancelled"
+		}
+	},
+	"errors": {
+		"notFound": {
+			"title": "404",
+			"subtitle": "Page not found",
+			"description": "The page you're looking for doesn't exist or has been moved.",
+			"backHome": "Back to Home",
+			"transactionHint": "Looking for a specific transaction? Check the ID"
+		},
+		"imageNotFound": {
+			"title": "Image not found",
+			"description": "This image doesn't exist or couldn't be loaded from the blockchain."
+		}
+	},
+	"footer": {
+		"builtOn": "Developed on",
+		"blockchain": "Hive Blockchain"
+	}
+}

@@ -1,6 +1,10 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/svelte/Header.svelte";
+import { getLangFromUrl, useTranslations } from "@/i18n/config";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Layout>
@@ -37,7 +41,7 @@ import Header from "@/components/svelte/Header.svelte";
           <span
             class="text-muted-foreground font-mono text-xs tracking-wider uppercase"
           >
-            Almacenamiento on-chain
+            {t("home.hero.tag")}
           </span>
         </div>
 
@@ -45,17 +49,17 @@ import Header from "@/components/svelte/Header.svelte";
         <h1
           class="animate-slide-up mb-6 font-mono text-4xl font-bold tracking-tight uppercase delay-1 sm:text-5xl md:text-6xl lg:text-7xl"
         >
-          <span class="block">Tu pixel art,</span>
-          <span class="text-glow text-accent block">onChain</span>
+          <span class="block">{t("home.hero.title")}</span>
+          <span class="text-glow text-accent block">{t("home.hero.titleHighlight")}</span>
         </h1>
 
         <!-- Subheadline -->
         <p
           class="animate-slide-up text-muted-foreground mx-auto mb-8 max-w-2xl font-sans text-lg delay-2 sm:text-xl"
         >
-          Imágenes directamente en la blockchain de Hive.<br />
-          <span class="text-foreground">Sin servidores externos.</span>
-          Almacenadas en base64 on-chain.
+          {t("home.hero.subtitle")}<br />
+          <span class="text-foreground">{t("home.hero.subtitleHighlight")}</span>
+          {t("home.hero.subtitleEnd")}
         </p>
 
         <!-- Trust badges -->
@@ -63,19 +67,19 @@ import Header from "@/components/svelte/Header.svelte";
           class="animate-slide-up flex flex-wrap items-center justify-center gap-3 mb-10 delay-2"
         >
           <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-subtle border border-text/10 font-mono text-xs">
-            <span class="text-accent">✓</span> Sin CDN
+            <span class="text-accent">✓</span> {t("home.badges.noCdn")}
           </span>
           <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-subtle border border-text/10 font-mono text-xs">
-            <span class="text-accent">✓</span> Sin IPFS
+            <span class="text-accent">✓</span> {t("home.badges.noIpfs")}
           </span>
           <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-subtle border border-text/10 font-mono text-xs">
-            <span class="text-accent">✓</span> Sin cloud storage
+            <span class="text-accent">✓</span> {t("home.badges.noCloud")}
           </span>
           <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-subtle border border-text/10 font-mono text-xs">
-            <span class="text-accent">✓</span> 100% on-chain
+            <span class="text-accent">✓</span> {t("home.badges.onChain")}
           </span>
           <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-subtle border border-text/10 font-mono text-xs">
-            <span class="text-accent">✓</span> Acceso público
+            <span class="text-accent">✓</span> {t("home.badges.publicAccess")}
           </span>
         </div>
 
@@ -99,7 +103,7 @@ import Header from "@/components/svelte/Header.svelte";
                 <polyline points="17 8 12 3 7 8"></polyline>
                 <line x1="12" y1="3" x2="12" y2="15"></line>
               </svg>
-              Subir mi imagen
+              {t("home.hero.cta")}
             </span>
           </a>
           <a
@@ -107,7 +111,7 @@ import Header from "@/components/svelte/Header.svelte";
             class="group border-border text-foreground hover:border-foreground border px-8 py-4 font-mono text-sm tracking-wider uppercase transition-all"
           >
             <span class="flex items-center gap-2">
-              Ver galería
+              {t("home.hero.exploreLink")}
               <svg
                 class="h-4 w-4 transition-transform group-hover:translate-x-1"
                 viewBox="0 0 24 24"
@@ -136,7 +140,7 @@ import Header from "@/components/svelte/Header.svelte";
             <p
               class="text-muted-foreground font-mono text-xs tracking-wider uppercase"
             >
-              Imágenes
+              {t("home.stats.images")}
             </p>
           </div>
           <div class="text-center">
@@ -144,7 +148,7 @@ import Header from "@/components/svelte/Header.svelte";
             <p
               class="text-muted-foreground font-mono text-xs tracking-wider uppercase"
             >
-              Tamaño máx.
+              {t("home.stats.maxSize")}
             </p>
           </div>
           <div class="text-center">
@@ -152,7 +156,7 @@ import Header from "@/components/svelte/Header.svelte";
             <p
               class="text-muted-foreground font-mono text-xs tracking-wider uppercase"
             >
-              Permanencia
+              {t("home.stats.permanence")}
             </p>
           </div>
         </div>
@@ -196,11 +200,10 @@ import Header from "@/components/svelte/Header.svelte";
             <h3
               class="mb-2 font-mono text-lg font-semibold tracking-wide uppercase"
             >
-              Inmutable
+              {t("home.features.immutable.title")}
             </h3>
             <p class="text-muted-foreground font-sans text-sm">
-              Tu arte queda grabado en la blockchain. Nadie puede borrarlo,
-              censurarlo o modificarlo.
+              {t("home.features.immutable.description")}
             </p>
           </div>
 
@@ -225,11 +228,10 @@ import Header from "@/components/svelte/Header.svelte";
             <h3
               class="mb-2 font-mono text-lg font-semibold tracking-wide uppercase"
             >
-              Sin costo
+              {t("home.features.free.title")}
             </h3>
             <p class="text-muted-foreground font-sans text-sm">
-              Solo necesitas una cuenta de Hive con Resource Credits. Sin
-              tarifas de transacción.
+              {t("home.features.free.description")}
             </p>
           </div>
 
@@ -254,11 +256,10 @@ import Header from "@/components/svelte/Header.svelte";
             <h3
               class="mb-2 font-mono text-lg font-semibold tracking-wide uppercase"
             >
-              Optimizado
+              {t("home.features.optimized.title")}
             </h3>
             <p class="text-muted-foreground font-sans text-sm">
-              Compresión inteligente diseñada para pixel art. Máxima calidad en
-              el menor espacio.
+              {t("home.features.optimized.description")}
             </p>
           </div>
         </div>
@@ -271,31 +272,31 @@ import Header from "@/components/svelte/Header.svelte";
         <h2
           class="mb-12 text-center font-mono text-2xl font-bold tracking-wider uppercase sm:text-3xl"
         >
-          Cómo funciona
+          {t("home.howItWorks.title")}
         </h2>
 
         <div class="grid gap-8 md:grid-cols-4">
           {
             [
               {
-                step: "01",
-                title: "Sube tu imagen",
-                desc: "PNG, JPEG o WebP",
+                step: t("home.howItWorks.step1.number"),
+                title: t("home.howItWorks.step1.title"),
+                desc: t("home.howItWorks.step1.description"),
               },
               {
-                step: "02",
-                title: "Conversión",
-                desc: "Se convierte automáticamente a base64",
+                step: t("home.howItWorks.step2.number"),
+                title: t("home.howItWorks.step2.title"),
+                desc: t("home.howItWorks.step2.description"),
               },
               {
-                step: "03",
-                title: "Firma y guarda",
-                desc: "Se almacena directamente en Hive",
+                step: t("home.howItWorks.step3.number"),
+                title: t("home.howItWorks.step3.title"),
+                desc: t("home.howItWorks.step3.description"),
               },
               {
-                step: "04",
-                title: "Para siempre",
-                desc: "Pública y accesible por cualquier persona",
+                step: t("home.howItWorks.step4.number"),
+                title: t("home.howItWorks.step4.title"),
+                desc: t("home.howItWorks.step4.description"),
               },
             ].map((item) => (
               <div class="relative text-center">
@@ -315,7 +316,7 @@ import Header from "@/components/svelte/Header.svelte";
 
         <!-- Public notice -->
         <p class="mt-12 text-center font-mono text-xs text-muted-foreground">
-          <span class="text-accent">Importante:</span> Todas las imágenes son públicas y visibles para cualquier persona.
+          <span class="text-accent">{t("common.important")}</span> {t("home.howItWorks.notice")}
         </p>
       </div>
     </section>
@@ -325,11 +326,11 @@ import Header from "@/components/svelte/Header.svelte";
   <footer class="border-border border-t py-8">
     <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
       <p class="text-muted-foreground font-mono text-xs">
-        Desarrollado sobre <a
+        {t("footer.builtOn")} <a
           href="https://hive.io"
           target="_blank"
           rel="noopener"
-          class="text-accent hover:underline">Hive Blockchain</a
+          class="text-accent hover:underline">{t("footer.blockchain")}</a
         >
         <span class="mx-2">·</span>
         <span class="animate-blink">█</span>

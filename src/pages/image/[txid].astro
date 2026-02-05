@@ -3,6 +3,10 @@ import Layout from '@/layouts/Layout.astro';
 import Header from '@/components/svelte/Header.svelte';
 import ImageViewer from '@/components/svelte/ImageViewer.svelte';
 import { sanitizeTxid } from '@/lib/validation/hive';
+import { getLangFromUrl, useTranslations } from '@/i18n/config';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const { txid: rawTxid } = Astro.params;
 
@@ -12,9 +16,8 @@ if (!txid) {
 	return Astro.redirect('/explore');
 }
 
-// Basic metadata - la imagen se carga del lado del cliente
-const pageTitle = 'Pixel Art | Immutable Runes';
-const pageDescription = 'Pixel art guardado permanentemente en la blockchain de Hive';
+const pageTitle = `Pixel Art | ${t('header.brandName')}`;
+const pageDescription = t('home.hero.subtitle');
 const ogImageUrl = `${Astro.url.origin}/api/og/${txid}`;
 ---
 

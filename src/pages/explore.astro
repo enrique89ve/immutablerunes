@@ -2,9 +2,13 @@
 import Layout from '@/layouts/Layout.astro';
 import Header from '@/components/svelte/Header.svelte';
 import ExploreLoader from '@/components/svelte/ExploreLoader.svelte';
+import { getLangFromUrl, useTranslations } from '@/i18n/config';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<Layout title="Explorar | Immutable Runes">
+<Layout title={`${t('explore.title')} | Immutable Runes`}>
 	<Header client:load />
 	<ExploreLoader client:load />
 </Layout>

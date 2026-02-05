@@ -1,0 +1,210 @@
+{
+	"common": {
+		"loading": "Cargando...",
+		"error": "Error",
+		"cancel": "Cancelar",
+		"confirm": "Confirmar",
+		"close": "Cerrar",
+		"save": "Guardar",
+		"delete": "Eliminar",
+		"back": "Volver",
+		"next": "Siguiente",
+		"connected": "Conectado",
+		"connect": "Conectar",
+		"logout": "Cerrar sesión",
+		"important": "Importante:"
+	},
+	"nav": {
+		"explore": "Explorar",
+		"upload": "Subir",
+		"myGallery": "Mi galería",
+		"uploadImage": "Subir imagen",
+		"viewOnHive": "Ver en Hive"
+	},
+	"header": {
+		"brandName": "ImmutableRunes"
+	},
+	"home": {
+		"hero": {
+			"tag": "Almacenamiento on-chain",
+			"title": "Tu pixel art,",
+			"titleHighlight": "onChain",
+			"subtitle": "Imágenes directamente en la blockchain de Hive.",
+			"subtitleHighlight": "Sin servidores externos.",
+			"subtitleEnd": "Almacenadas en base64 on-chain.",
+			"cta": "Subir mi imagen",
+			"exploreLink": "Ver galería"
+		},
+		"badges": {
+			"noCdn": "Sin CDN",
+			"noIpfs": "Sin IPFS",
+			"noCloud": "Sin cloud storage",
+			"onChain": "100% on-chain",
+			"publicAccess": "Acceso público"
+		},
+		"stats": {
+			"images": "Imágenes",
+			"maxSize": "Tamaño máx.",
+			"permanence": "Permanencia"
+		},
+		"features": {
+			"title": "¿Por qué Immutable Runes?",
+			"immutable": {
+				"title": "Inmutable",
+				"description": "Tu arte queda grabado en la blockchain. Nadie puede borrarlo, censurarlo o modificarlo."
+			},
+			"free": {
+				"title": "Sin costo",
+				"description": "Solo necesitas una cuenta de Hive con Resource Credits. Sin tarifas de transacción."
+			},
+			"optimized": {
+				"title": "Optimizado",
+				"description": "Compresión inteligente diseñada para pixel art. Máxima calidad en el menor espacio."
+			}
+		},
+		"howItWorks": {
+			"title": "Cómo funciona",
+			"step1": {
+				"number": "01",
+				"title": "Sube tu imagen",
+				"description": "PNG, JPEG o WebP"
+			},
+			"step2": {
+				"number": "02",
+				"title": "Conversión",
+				"description": "Se convierte automáticamente a base64"
+			},
+			"step3": {
+				"number": "03",
+				"title": "Firma y guarda",
+				"description": "Se almacena directamente en Hive"
+			},
+			"step4": {
+				"number": "04",
+				"title": "Para siempre",
+				"description": "Pública y accesible por cualquier persona"
+			},
+			"notice": "Todas las imágenes son públicas y visibles para cualquier persona."
+		},
+		"cta": {
+			"title": "¿Listo para hacer historia?",
+			"subtitle": "Tu pixel art merece vivir para siempre.",
+			"button": "Empezar a Crear"
+		}
+	},
+	"explore": {
+		"title": "Explorar",
+		"subtitle": "Descubre el último pixel art almacenado en la blockchain",
+		"empty": "No se encontraron imágenes",
+		"emptySubtitle": "Sé el primero en subir pixel art a la blockchain",
+		"uploadCta": "Subir la primera imagen"
+	},
+	"gallery": {
+		"large": "Grande",
+		"grid": "Grid"
+	},
+	"upload": {
+		"title": "Subir",
+		"subtitle": "Almacena tu pixel art permanentemente en la blockchain",
+		"loginRequired": "Conecta tu cuenta de Hive para subir imágenes",
+		"loginButton": "Conectar con Keychain",
+		"dropzone": {
+			"title": "Arrastra tu imagen aquí",
+			"subtitle": "o haz clic para seleccionar",
+			"formats": "PNG, JPEG, WebP • Máx 200×200px",
+			"sizeLimit": "Se optimizará a ~18KB"
+		},
+		"preview": {
+			"title": "Vista Previa",
+			"filename": "Archivo",
+			"dimensions": "Dimensiones",
+			"size": "Tamaño",
+			"fragments": "Fragmentos",
+			"aspectRatio": "Proporción",
+			"transparency": "Transparencia",
+			"yes": "Sí",
+			"no": "No",
+			"viewFullSize": "Ampliar",
+			"imagePreview": "Vista previa de imagen",
+			"cancelButton": "Cancelar",
+			"uploadButton": "Subir a Blockchain",
+			"processing": "Procesando..."
+		},
+		"success": {
+			"title": "¡Imagen guardada!",
+			"subtitle": "Tu pixel art ya está en la blockchain de Hive",
+			"transactionId": "ID de Transacción"
+		},
+		"progress": {
+			"title": "Subiendo",
+			"preparing": "Preparando transacción...",
+			"signing": "Firmando con Keychain...",
+			"broadcasting": "Transmitiendo a blockchain...",
+			"confirming": "Confirmando...",
+			"complete": "¡Completado!",
+			"fragmentProgress": "Fragmento {current} de {total}",
+			"viewImage": "Ver Imagen",
+			"uploadAnother": "Subir Otra"
+		},
+		"errors": {
+			"invalidFormat": "Formato inválido. Usa PNG, JPEG o WebP",
+			"tooLarge": "Imagen muy grande. Máximo 200×200 píxeles",
+			"processingFailed": "Error al procesar imagen",
+			"uploadFailed": "Error al subir imagen",
+			"keychainRequired": "Se requiere Hive Keychain",
+			"notLoggedIn": "Por favor inicia sesión primero"
+		}
+	},
+	"profile": {
+		"title": "Galería de {username}",
+		"images": "Imágenes",
+		"empty": "Sin imágenes aún",
+		"emptyOwn": "Aún no has subido ninguna imagen",
+		"uploadFirst": "Sube tu primera imagen",
+		"viewOnHive": "Ver perfil en Hive"
+	},
+	"imageViewer": {
+		"by": "por",
+		"uploadedOn": "Subido el",
+		"block": "Bloque",
+		"transaction": "Transacción",
+		"dimensions": "Dimensiones",
+		"aspectRatio": "Proporción",
+		"viewOnExplorer": "Ver en Explorer",
+		"copyTxid": "Copiar TXID",
+		"copied": "¡Copiado!",
+		"share": "Compartir",
+		"download": "Descargar"
+	},
+	"login": {
+		"title": "Conectar Wallet",
+		"subtitle": "Ingresa tu usuario de Hive para continuar",
+		"usernamePlaceholder": "usuario",
+		"connectButton": "Conectar",
+		"connecting": "Conectando...",
+		"installKeychain": "Instalar Hive Keychain",
+		"keychainRequired": "Se requiere la extensión Hive Keychain",
+		"errors": {
+			"keychainNotFound": "Hive Keychain no encontrado",
+			"loginFailed": "Error al iniciar sesión",
+			"userCancelled": "Usuario canceló"
+		}
+	},
+	"errors": {
+		"notFound": {
+			"title": "404",
+			"subtitle": "Página no encontrada",
+			"description": "La página que buscas no existe o ha sido movida.",
+			"backHome": "Volver al Inicio",
+			"transactionHint": "¿Buscas una transacción específica? Verifica el ID"
+		},
+		"imageNotFound": {
+			"title": "Imagen no encontrada",
+			"description": "Esta imagen no existe o no se pudo cargar desde la blockchain."
+		}
+	},
+	"footer": {
+		"builtOn": "Desarrollado sobre",
+		"blockchain": "Hive Blockchain"
+	}
+}
